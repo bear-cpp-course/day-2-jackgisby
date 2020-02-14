@@ -1,77 +1,132 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
-int main() {
-    // Take each letter from user input and in each case:
-    //
-    // - Convert to upper case
-    // - Change numbers to words
-    // - Ignore any other (non-alpha) characters
-    // - In each case, add result to a string variable
-    //
-    // print out the new string
+
+std::string transformChar (
+        const char& in_char
+        ) {
+    /* transform character to formatted string
+     *
+     * const char: character to be converted
+     *
+     * return: formatted character
+     */
+
+    switch(in_char) {
+        case '1':
+            return "ONE";
+
+        case '2':
+            return "TWO";
+
+        case '3':
+            return "THREE";
+
+        case '4':
+            return "FOUR";
+
+        case '5':
+            return "FIVE";
+
+        case '6':
+            return "SIX";
+
+        case '7':
+            return "SEVEN";
+
+        case '8':
+            return "EIGHT";
+
+        case '9':
+            return "NINE";
+
+        case '0':
+            return "ZERO";
+
+        // if an alphanumeric non-number
+        default:
+            if (isalpha(in_char)) {
+                return std::string {static_cast<char>(toupper(in_char))};
+            } else {
+                return "";
+            }
+    }
+}
+
+bool processCommandLine(
+        std::string& input,
+        std::string& output,
+        const std::vector<std::string>& cmdLineArgs,
+        const int& argc,
+        bool& debug
+        ) {
+    /* processes command line arguments
+     *
+     * string input: input string
+     * string output: output string
+     * cmdLineArgs: string vector of command line arguments
+     * int argc: number of command line arguments
+     * bool debug: activate program debug mode?
+     *
+     * return: were correct arguments passed?
+     */
+
+    for (int i=0; i<argc; ++i) {
+        if (cmdLineArgs.at(i) == "-h" or cmdLineArgs.at(i) == "--help") {
+            std::cout << "Please read the source code for help" << "\n";
+
+        } else if (cmdLineArgs.at(i) == "-o") {
+            ++i;
+            output = cmdLineArgs.at(i);
+
+        } else if (cmdLineArgs.at(i) == "-i") {
+            ++i;
+            input = cmdLineArgs.at(i);
+
+        } else if (cmdLineArgs[i] == "--version") {
+            std::cout << "0.1.0" << "\n";
+
+        } else if (cmdLineArgs[i] == "--debug" or cmdLineArgs[i] == "-d") {
+            debug = true;
+        }
+
+        if (debug) {
+            std::cout << cmdLineArgs.at(i) << "\n";
+        }
+    }
+
+    return input.empty() or output.empty();
+}
+
+int main(
+        int argc,
+        char* argv[]
+        ) {
+
+    const std::vector<std::string> cmdLineArgs {argv, argv+argc};
+    std::string input {""};
+    std::string output {""};
+    bool debug {false};
+
+    if (processCommandLine(input, output, cmdLineArgs, argc, debug)) {
+        std::cerr << "[error] please specify input and output paths" << "\n";
+    }
 
     char in_char{'x'};
     std::string code{""};
 
+    // convert input to formatted string
     while(std::cin >> in_char) {
-        in_char = toupper(in_char);
-        std::string str_char {in_char};
-
-        // convert numbers to capital words
-        switch(in_char) {
-            case '1':
-                str_char = "ONE";
-                break;
-
-            case '2':
-                str_char = "TWO";
-                break;
-
-            case '3':
-                str_char = "THREE";
-                break;
-
-            case '4':
-                str_char = "FOUR";
-                break;
-
-            case '5':
-                str_char = "FIVE";
-                break;
-
-            case '6':
-                str_char = "SIX";
-                break;
-
-            case '7':
-                str_char = "SEVEN";
-                break;
-
-            case '8':
-                str_char = "EIGHT";
-                break;
-
-            case '9':
-                str_char = "NINE";
-                break;
-
-            case '0':
-                str_char = "ZERO";
-                break;
-
-            // if an alphanumeric non-number
-            default:
-                if (isalpha(in_char)) {
-                    str_char = in_char;
-                } else {
-                    continue;
-                }
+        if (in_char == 'q') { // alternative exit; remove for final program
+            break;
         }
 
-        code += str_char;
+        code += transformChar(in_char);
     }
 
-    std::cout << code << "\n";
+    if (debug) {
+        std::cout << code << "\n";
+    }
     return 0;
 }
