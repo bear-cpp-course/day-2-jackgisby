@@ -34,3 +34,8 @@
 *.exe
 *.out
 *.app
+
+# IDE Stuff
+.idea
+CMakeLists.txt
+cmake-build-debug
