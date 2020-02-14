@@ -90,10 +90,6 @@ bool processCommandLine(
         } else if (cmdLineArgs[i] == "--debug" or cmdLineArgs[i] == "-d") {
             debug = true;
         }
-
-        if (debug) {
-            std::cout << cmdLineArgs.at(i) << "\n";
-        }
     }
 
     return input.empty() or output.empty();
