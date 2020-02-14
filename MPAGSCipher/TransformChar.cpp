@@ -1,5 +1,8 @@
-#include <iostream>
+// Standard library
 #include <string>
+
+// Project files
+#include "TransformChar.hpp"
 
 std::string transformChar (
         const char& in_char

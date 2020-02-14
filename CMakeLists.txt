@@ -12,4 +12,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(mpags-cipher
         mpags-cipher.cpp
         MPAGSCipher/TransformChar.cpp
-        MPAGSCipher/ProcessCommandLine.cpp)
+        MPAGSCipher/TransformChar.hpp
+        MPAGSCipher/ProcessCommandLine.cpp
+        MPAGSCipher/ProcessCommandLine.hpp
+        MPAGSCipher/runCaeserCipher.cpp
+        MPAGSCipher/runCaeserCipher.hpp
+        )
+
+target_include_directories(mpags-cipher
+        PRIVATE MPAGSCipher
+        )

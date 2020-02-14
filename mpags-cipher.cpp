@@ -1,16 +1,13 @@
+// Standard library
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 
-std::string transformChar(const char& in_char);
-
-bool processCommandLine(
-        std::string& input,
-        std::string& output,
-        const std::vector<std::string>& cmdLineArgs,
-        const int& argc,
-        bool& debug
-);
+// Project files
+#include "TransformChar.hpp"
+#include "ProcessCommandLine.hpp"
+#include "runCaeserCipher.hpp"
 
 int main(
         int argc,
@@ -20,26 +17,35 @@ int main(
     const std::vector<std::string> cmdLineArgs {argv, argv+argc};
     std::string input {""};
     std::string output {""};
+    int key {5};
     bool debug {false};
-
-    if (processCommandLine(input, output, cmdLineArgs, argc, debug)) {
+    bool encrypt {true};
+    if (processCommandLine(input, output, cmdLineArgs, argc, debug, key, encrypt)) {
         std::cerr << "[error] please specify input and output paths" << "\n";
     }
 
+    std::ifstream in_file {input};
+    std::ofstream out_file {output};
     char in_char{'x'};
     std::string code{""};
 
     // convert input to formatted string
-    while(std::cin >> in_char) {
-        if (in_char == 'q') { // alternative exit; remove for final program
-            break;
+    if (debug) {
+        std::cout << "input: ";
+    }
+    while(in_file >> in_char) {
+        if (debug) {
+            std::cout << in_char;
         }
 
         code += transformChar(in_char);
     }
 
+    code = runCaeserCipher(code, key, encrypt);
     if (debug) {
-        std::cout << code << "\n";
+        std::cout << "\n" << "output: " << code << "\n";
     }
+
+    out_file << code;
     return 0;
 }

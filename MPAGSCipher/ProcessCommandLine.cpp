@@ -1,13 +1,19 @@
+// Standard library
 #include <iostream>
 #include <string>
 #include <vector>
+
+// Project files
+#include "ProcessCommandLine.hpp"
 
 bool processCommandLine(
         std::string& input,
         std::string& output,
         const std::vector<std::string>& cmdLineArgs,
         const int& argc,
-        bool& debug
+        bool& debug,
+        int& key,
+        bool& encrypt
 ) {
     /* processes command line arguments
      *
@@ -37,6 +43,13 @@ bool processCommandLine(
 
         } else if (cmdLineArgs[i] == "--debug" or cmdLineArgs[i] == "-d") {
             debug = true;
+
+        } else if (cmdLineArgs[i] == "--key" or cmdLineArgs[i] == "-k") {
+            ++i;
+            key = std::stoi(cmdLineArgs.at(i));
+
+        } else if (cmdLineArgs[i] == "--decrypt") {
+            encrypt = false;
         }
     }
 
