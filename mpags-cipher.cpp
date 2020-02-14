@@ -14,16 +14,20 @@ int main(
         char* argv[]
         ) {
 
+    // initialise program arguments
     const std::vector<std::string> cmdLineArgs {argv, argv+argc};
     std::string input {""};
     std::string output {""};
     int key {5};
     bool debug {false};
     bool encrypt {true};
+
+    // process arguments & check that input/output are supplied
     if (processCommandLine(input, output, cmdLineArgs, argc, debug, key, encrypt)) {
         std::cerr << "[error] please specify input and output paths" << "\n";
     }
 
+    // setup program input/outputs
     std::ifstream in_file {input};
     std::ofstream out_file {output};
     char in_char{'x'};
@@ -41,11 +45,16 @@ int main(
         code += transformChar(in_char);
     }
 
+    in_file.close();
+
+    // convert formatted string to ciphered string & output
     code = runCaeserCipher(code, key, encrypt);
     if (debug) {
         std::cout << "\n" << "output: " << code << "\n";
     }
 
     out_file << code;
+    out_file.close();
+
     return 0;
 }

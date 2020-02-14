@@ -15,6 +15,7 @@ std::string transformChar (
      */
 
     switch(in_char) {
+        // convert numbers to letters
         case '1':
             return "ONE";
 
@@ -45,11 +46,11 @@ std::string transformChar (
         case '0':
             return "ZERO";
 
-            // if an alphanumeric non-number
+
         default:
-            if (isalpha(in_char)) {
+            if (isalpha(in_char)) {  // capitalise remaining alphanumeric characters
                 return std::string {static_cast<char>(toupper(in_char))};
-            } else {
+            } else { // remove non-alphanumeric characters
                 return "";
             }
     }

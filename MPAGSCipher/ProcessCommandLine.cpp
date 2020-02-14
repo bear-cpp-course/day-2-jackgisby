@@ -19,13 +19,16 @@ bool processCommandLine(
      *
      * string input: input string
      * string output: output string
-     * cmdLineArgs: string vector of command line arguments
+     * vector(string) cmdLineArgs: string vector of command line arguments
      * int argc: number of command line arguments
      * bool debug: activate program debug mode?
+     * int key: the key to use when encrypting/decrypting the strnig
+     * bool encrypt: encrypt or decrypt the input string
      *
      * return: were correct arguments passed?
      */
 
+    // process various arguments
     for (int i=0; i<argc; ++i) {
         if (cmdLineArgs.at(i) == "-h" or cmdLineArgs.at(i) == "--help") {
             std::cout << "Please read the source code for help" << "\n";
@@ -53,5 +56,6 @@ bool processCommandLine(
         }
     }
 
+    // check that the user supplied both input and output
     return input.empty() or output.empty();
 }
