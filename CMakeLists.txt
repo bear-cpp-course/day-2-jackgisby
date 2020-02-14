@@ -1,10 +1,15 @@
-cmake_minimum_required(VERSION 3.13)  # CMake version check
-project(day-1-jackgisby)               # Create project "simple_example"
-set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
+cmake_minimum_required(VERSION 3.2)  # CMake version check
+project(MPAGSCipher VERSION 0.1.0)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 14)  # Enable c++14 standard
 
-# Add main.cpp file of project root directory as source file
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 set(SOURCE_FILES mpags-cipher.cpp)
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror -Wfatal-errors -pedantic -Wshadow")
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror -Wfatal-errors -pedantic -Wshadow") # include error messages
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Add executable target with source files listed in SOURCE_FILES variable
-add_executable(mpags-cipher ${SOURCE_FILES})
+add_executable(mpags-cipher
+        mpags-cipher.cpp
+        MPAGSCipher/TransformChar.cpp
+        MPAGSCipher/ProcessCommandLine.cpp)
