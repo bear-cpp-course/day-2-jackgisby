@@ -2,10 +2,17 @@
 #define MPAGSCIPHER_CAESARCIPHER_HPP
 
 // Standard library
+#include <string>
 
 // Project files
 #include "CaesarCipher.hpp"
 
+/**
+ * Implementation of the caesar cipher
+ *
+ * @param encryptKey_ the key used for encryption and decryption
+ * @param alphabet_ the allowable characters for ciphers
+ */
 class CaesarCipher {
 private:
     int encryptKey_;
@@ -13,14 +20,14 @@ private:
 
 public:
     /**
-     *  Create a cipher class based on a key
+     *  Create a caesar cipher class based on a key
      *
      * @param key encryption key
      */
     explicit CaesarCipher(int& key);
 
     /**
-     * Create a cipher class based on a key
+     * Create a caesar cipher class based on a key
      *
      * @param key encryption key
      */
@@ -31,6 +38,8 @@ public:
      *
      * @param inputText text to be encrypted or decrypted
      * @param encrypt whether to encrypt or decrypt the input text
+     *
+     * @note uses the class's key & alphabet for encryption and decryption
      *
      * @return the encrypted or decrypted code
      */
