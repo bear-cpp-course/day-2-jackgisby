@@ -62,7 +62,7 @@ int CaesarCipher::getKey() const {
     return encryptKey_;
 }
 
-void CaesarCipher::setKey(const int& key) {
+void CaesarCipher::setKey(int& key) {
     encryptKey_ = key;
 }
 

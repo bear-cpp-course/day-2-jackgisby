@@ -9,7 +9,7 @@
 // Project files
 #include "ProcessCommandLine.hpp"
 
-//! Setup program arguments
+/// Structure containing program settings, set during command line processing
 struct ProgramSettings {
     std::string input {""};
     std::string output {""};
@@ -18,7 +18,15 @@ struct ProgramSettings {
     bool encrypt {true};
 };
 
-//! Process command line arguments
+/**
+ * Processes command line arguments
+ *
+ * @param argc number of command line arguments
+ * @param argv pointer to character vector of command line arguments
+ * @param args struct containing program settings
+ *
+ * @return true if input or output is empty
+ */
 bool processCommandLine(
         const int& argc,
         const char* argv[],

@@ -11,19 +11,6 @@ bool processCommandLine(
         const char* argv[],
         ProgramSettings& args
 ) {
-    /* processes command line arguments
-     *
-     * string input: input string
-     * string output: output string
-     * vector(string) cmdLineArgs: string vector of command line arguments
-     * int argc: number of command line arguments
-     * bool debug: activate program debug mode?
-     * int key: the key to use when encrypting/decrypting the string
-     * bool encrypt: encrypt or decrypt the input string
-     *
-     * return: were correct arguments passed?
-     */
-
     const std::vector<std::string> cmdLineArgs {argv, argv + argc};
 
     // process various arguments
