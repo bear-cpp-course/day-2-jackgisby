@@ -1,13 +1,18 @@
-//
-// Created by jackg on 21/02/2020.
-//
+#ifndef MPAGSCIPHER_RUNCAESARCIPHER_HPP
+#define MPAGSCIPHER_RUNCAESARCIPHER_HPP
 
-#ifndef MPAGSCIPHER_RUNCAESARCIPHER_H
-#define MPAGSCIPHER_RUNCAESARCIPHER_H
+// Standard library
+#include <iostream>
+#include <string>
 
-class CaesarCipher {
-public:
-    std::string code;
-};
+// Project files
+#include "runCaesarCipher.hpp"
+#include "CaesarCipher.hpp"
 
-#endif //MPAGSCIPHER_RUNCAESARCIPHER_H
+std::string runCaesarCipher(
+        const std::string& inputText,
+        const bool& encrypt,
+        const CaesarCipher& cipher
+);
+
+#endif //MPAGSCIPHER_RUNCAESARCIPHER_HPP

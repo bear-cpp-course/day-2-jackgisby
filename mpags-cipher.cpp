@@ -7,7 +7,8 @@
 // Project files
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
-#include "runCaeserCipher.hpp"
+#include "runCaesarCipher.hpp"
+#include "CaesarCipher.hpp"
 
 int main(
         const int argc,
@@ -44,7 +45,8 @@ int main(
     in_file.close();
 
     // convert formatted string to ciphered string & output
-    code = runCaesarCipher(code, settings.key, settings.encrypt);
+    CaesarCipher cCipher {settings.key};
+    code = runCaesarCipher(code, settings.encrypt, cCipher);
     if (settings.debug) {
         std::cout << "\n" << "output: " << code << "\n";
     }

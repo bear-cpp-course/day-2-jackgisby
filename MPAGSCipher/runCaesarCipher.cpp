@@ -4,13 +4,14 @@
 
 // Project files
 #include "runCaesarCipher.hpp"
+#include "CaesarCipher.hpp"
 
 std::string runCaesarCipher(
         const std::string& inputText,
-        int key,
-        const bool& encrypt
+        const bool& encrypt,
+        const CaesarCipher& cipher
 ) {
-    /* Encrypt or decrypt a code based on the caeser cipher
+    /* Encrypt or decrypt a code based on the caesar cipher
      *
      * std::string inputText: Input code to be operated on
      * int key: the key to use to encode/decode the cipher
@@ -19,11 +20,12 @@ std::string runCaesarCipher(
      * return: encrypted/decrypted code
      */
 
-    const std::string alphabet {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
-
     // reverse key for decryption
-    if (encrypt == false) {
-        key = -key;
+    int key {0};
+    if (encrypt) {
+        key = cipher.encryptKey_;
+    } else {
+        key = -cipher.encryptKey_;
     }
 
     // encrypt/decrypt each character and return final code
@@ -32,7 +34,7 @@ std::string runCaesarCipher(
         // get alphabet position
         int base {0};
         for (int i {0}; i<26; ++i) {
-            if (x == alphabet.at(i)) {
+            if (x == cipher.alphabet_.at(i)) {
                 base = i;
             }
         }
@@ -46,9 +48,8 @@ std::string runCaesarCipher(
             base -= 26;
         }
 
-        code += alphabet.at(base);
+        code += cipher.alphabet_.at(base);
     }
 
     return code;
 }
-

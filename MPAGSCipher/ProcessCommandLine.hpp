@@ -13,7 +13,7 @@
 struct ProgramSettings {
     std::string input {""};
     std::string output {""};
-    int key {5};
+    std::string key {"5"};
     bool debug {false};
     bool encrypt {true};
 };
