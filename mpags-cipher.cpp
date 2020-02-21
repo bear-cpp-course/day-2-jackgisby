@@ -10,35 +10,31 @@
 #include "runCaeserCipher.hpp"
 
 int main(
-        int argc,
-        char* argv[]
+        const int argc,
+        const char* argv[]
         ) {
 
     // initialise program arguments
-    const std::vector<std::string> cmdLineArgs {argv, argv+argc};
-    std::string input {""};
-    std::string output {""};
-    int key {5};
-    bool debug {false};
-    bool encrypt {true};
+    ProgramSettings settings {};
 
     // process arguments & check that input/output are supplied
-    if (processCommandLine(input, output, cmdLineArgs, argc, debug, key, encrypt)) {
+    if (processCommandLine(argc, argv, settings)) {
         std::cerr << "[error] please specify input and output paths" << "\n";
     }
 
     // setup program input/outputs
-    std::ifstream in_file {input};
-    std::ofstream out_file {output};
+    std::ifstream in_file {settings.input};
+    std::ofstream out_file {settings.output};
     char in_char{'x'};
     std::string code{""};
 
     // convert input to formatted string
-    if (debug) {
+    if (settings.debug) {
         std::cout << "input: ";
     }
+
     while(in_file >> in_char) {
-        if (debug) {
+        if (settings.debug) {
             std::cout << in_char;
         }
 
@@ -48,8 +44,8 @@ int main(
     in_file.close();
 
     // convert formatted string to ciphered string & output
-    code = runCaeserCipher(code, key, encrypt);
-    if (debug) {
+    code = runCaeserCipher(code, settings.key, settings.encrypt);
+    if (settings.debug) {
         std::cout << "\n" << "output: " << code << "\n";
     }
 

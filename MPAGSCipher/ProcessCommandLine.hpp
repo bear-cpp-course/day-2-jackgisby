@@ -9,15 +9,20 @@
 // Project files
 #include "ProcessCommandLine.hpp"
 
+//! Setup program arguments
+struct ProgramSettings {
+    std::string input {""};
+    std::string output {""};
+    int key {5};
+    bool debug {false};
+    bool encrypt {true};
+};
+
 //! Process command line arguments
 bool processCommandLine(
-        std::string& input,
-        std::string& output,
-        const std::vector<std::string>& cmdLineArgs,
         const int& argc,
-        bool& debug,
-        int& key,
-        bool& encrypt
+        const char* argv[],
+        ProgramSettings& args
 );
 
 #endif // MPAGSCIPHER_PROCESSCOMMANDLINE_HPP
