@@ -5,6 +5,7 @@
 
 // Project files
 #include "ProcessCommandLine.hpp"
+#include "CipherMode.hpp"
 
 bool processCommandLine(
         const int& argc,
@@ -34,10 +35,18 @@ bool processCommandLine(
 
         } else if (cmdLineArgs[i] == "--key" or cmdLineArgs[i] == "-k") {
             ++i;
-            args.key = std::stoi(cmdLineArgs.at(i));
+            args.key = cmdLineArgs.at(i);
 
         } else if (cmdLineArgs[i] == "--decrypt") {
             args.encrypt = false;
+        } else if (cmdLineArgs[i] == "--cipher" or cmdLineArgs[i] == "-c") {
+            ++i;
+            if (cmdLineArgs.at(i) == "caesar") {
+                args.mode = CipherMode::caesar;
+            } else {
+                std::cout << "No cipher selected, using caesar as default \n";
+                args.mode = CipherMode::caesar;
+            }
         }
     }
 

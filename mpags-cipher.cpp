@@ -52,8 +52,11 @@ int main(
     in_file.close();
 
     // convert formatted string to ciphered string & output
-    CaesarCipher cCipher {settings.key};
-    code = cCipher.applyCipher(code, settings.encrypt);
+    if (settings.mode == CipherMode::caesar) {
+        CaesarCipher cipher {settings.key};
+        code = cipher.applyCipher(code, settings.encrypt);
+    }
+
     if (settings.debug) {
         std::cout << "\n" << "output: " << code << "\n";
     }

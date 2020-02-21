@@ -8,6 +8,7 @@
 
 // Project files
 #include "ProcessCommandLine.hpp"
+#include "CipherMode.hpp"
 
 /**
  * Structure containing program settings, set during command line processing
@@ -17,6 +18,7 @@
  * @param key the key for encryption or decryption
  * @param debug debug mode for verbose operation
  * @param encrypt whether to encrypt or decrypt the input text
+ * @param mode which cipher to use for encryption and decryption
  */
 struct ProgramSettings {
     std::string input {""};
@@ -24,6 +26,7 @@ struct ProgramSettings {
     std::string key {"5"};
     bool debug {false};
     bool encrypt {true};
+    CipherMode mode {CipherMode::caesar};
 };
 
 /**
