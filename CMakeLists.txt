@@ -11,13 +11,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Add executable target with source files listed in SOURCE_FILES variable
 add_executable(mpags-cipher
         mpags-cipher.cpp
-        MPAGSCipher/TransformChar.cpp
-        MPAGSCipher/TransformChar.hpp
-        MPAGSCipher/ProcessCommandLine.cpp
-        MPAGSCipher/ProcessCommandLine.hpp
-        MPAGSCipher/runCaeserCipher.cpp
-        MPAGSCipher/runCaeserCipher.hpp
-        MPAGSCipher/runCaesarCipher.cpp MPAGSCipher/runCaesarCipher.h)
+        MPAGSCipher/TransformChar.cpp MPAGSCipher/TransformChar.hpp
+        MPAGSCipher/ProcessCommandLine.cpp MPAGSCipher/ProcessCommandLine.hpp
+        MPAGSCipher/runCaesarCipher.cpp MPAGSCipher/runCaesarCipher.hpp)
 
 target_include_directories(mpags-cipher
         PRIVATE MPAGSCipher

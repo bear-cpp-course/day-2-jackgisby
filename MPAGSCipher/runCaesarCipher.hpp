@@ -5,4 +5,9 @@
 #ifndef MPAGSCIPHER_RUNCAESARCIPHER_H
 #define MPAGSCIPHER_RUNCAESARCIPHER_H
 
+class CaesarCipher {
+public:
+    std::string code;
+};
+
 #endif //MPAGSCIPHER_RUNCAESARCIPHER_H

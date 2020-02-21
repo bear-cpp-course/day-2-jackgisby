@@ -44,7 +44,7 @@ int main(
     in_file.close();
 
     // convert formatted string to ciphered string & output
-    code = runCaeserCipher(code, settings.key, settings.encrypt);
+    code = runCaesarCipher(code, settings.key, settings.encrypt);
     if (settings.debug) {
         std::cout << "\n" << "output: " << code << "\n";
     }
