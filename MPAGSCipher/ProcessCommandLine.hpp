@@ -25,8 +25,7 @@ struct ProgramSettings {
     std::string output {""};
     std::string key {"5"};
     bool debug {false};
-    bool encrypt {true};
-    CipherMode mode {CipherMode::caesar};
+    CipherMode mode {CipherMode::encrypt};
 };
 
 /**

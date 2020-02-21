@@ -38,15 +38,7 @@ bool processCommandLine(
             args.key = cmdLineArgs.at(i);
 
         } else if (cmdLineArgs[i] == "--decrypt") {
-            args.encrypt = false;
-        } else if (cmdLineArgs[i] == "--cipher" or cmdLineArgs[i] == "-c") {
-            ++i;
-            if (cmdLineArgs.at(i) == "caesar") {
-                args.mode = CipherMode::caesar;
-            } else {
-                std::cout << "No cipher selected, using caesar as default \n";
-                args.mode = CipherMode::caesar;
-            }
+            args.mode = CipherMode::decrypt;
         }
     }
 

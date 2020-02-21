@@ -6,6 +6,7 @@
 
 // Project files
 #include "CaesarCipher.hpp"
+#include "CipherMode.hpp"
 
 /**
  * Implementation of the caesar cipher
@@ -44,8 +45,8 @@ public:
      * @return the encrypted or decrypted code
      */
     std::string applyCipher(
-            const std::string &inputText,
-            const bool &encrypt
+            const std::string& inputText,
+            const CipherMode& mode
             ) const;
 
     /**

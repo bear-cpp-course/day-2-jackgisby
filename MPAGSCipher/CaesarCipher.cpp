@@ -3,6 +3,7 @@
 
 // Project files
 #include "CaesarCipher.hpp"
+#include "CipherMode.hpp"
 
 CaesarCipher::CaesarCipher(int& key)
 : encryptKey_(key) {
@@ -14,7 +15,7 @@ CaesarCipher::CaesarCipher(std::string& key)
 
 std::string CaesarCipher::applyCipher(
         const std::string& inputText,
-        const bool& encrypt
+        const CipherMode& mode
         ) const {
     /* Encrypt or decrypt a code based on the caesar cipher
      *
@@ -26,7 +27,7 @@ std::string CaesarCipher::applyCipher(
 
     // reverse key for decryption
     int key {0};
-    if (encrypt) {
+    if (mode == CipherMode::encrypt) {
         key = encryptKey_;
     } else {
         key = -encryptKey_;

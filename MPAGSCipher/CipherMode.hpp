@@ -5,12 +5,14 @@
 #include "CipherMode.hpp"
 
 /**
- * Which cipher to use for encryption/decryption
+ * Whether to encrypt or decrypt the input text
  *
- * @param caesar Use the Caeser Cipher
+ * @param encrypt encrypt the input text
+ * @param decrypt decrypt the input text
  */
 enum class CipherMode {
-    caesar
+    encrypt,
+    decrypt
 };
 
 #endif //MPAGSCIPHER_CIPHERMODE_HPP
