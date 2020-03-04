@@ -8,13 +8,11 @@ set(SOURCE_FILES mpags-cipher.cpp)
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror -Wfatal-errors -pedantic -Wshadow") # include error messages
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Add executable target with source files listed in SOURCE_FILES variable
-add_executable(mpags-cipher
-        mpags-cipher.cpp
-        MPAGSCipher/TransformChar.cpp MPAGSCipher/TransformChar.hpp
-        MPAGSCipher/ProcessCommandLine.cpp MPAGSCipher/ProcessCommandLine.hpp
-        MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp MPAGSCipher/CipherMode.hpp)
+# testing
+enable_testing()
+add_subdirectory(Testing)
 
-target_include_directories(mpags-cipher
-        PRIVATE MPAGSCipher
-        )
+# Add executable target with source files listed in SOURCE_FILES variable
+add_subdirectory(MPAGSCipher)
+add_executable(mpags-cipher mpags-cipher.cpp)
+target_link_libraries(mpags-cipher PRIVATE MPAGSCipher)

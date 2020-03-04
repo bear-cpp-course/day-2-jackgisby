@@ -46,7 +46,6 @@ std::string transformChar (
         case '0':
             return "ZERO";
 
-
         default:
             if (isalpha(in_char)) {  // capitalise remaining alphanumeric characters
                 return std::string {static_cast<char>(toupper(in_char))};

@@ -52,7 +52,6 @@ int main(
     in_file.close();
 
     // convert formatted string to ciphered string & output
-
     CaesarCipher cipher {settings.key};
     code = cipher.applyCipher(code, settings.mode);
 
