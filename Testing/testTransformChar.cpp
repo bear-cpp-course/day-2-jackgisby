@@ -25,3 +25,9 @@ TEST_CASE("Digits are transliterated", "[alphanumeric]") {
     REQUIRE( transformChar('8') == "EIGHT" );
     REQUIRE( transformChar('9') == "NINE" );
 }
+
+TEST_CASE("Non-alphanumeric characters are ignored", "[alphanumeric]") {
+    REQUIRE( transformChar('!').empty() );
+    REQUIRE( transformChar('#').empty() );
+    REQUIRE( transformChar(',').empty() );
+}
