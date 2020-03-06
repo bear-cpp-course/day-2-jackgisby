@@ -9,14 +9,6 @@
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
 
-/**
- * Body of mpags cipher
- *
- * @param argc number of command line arguments
- * @param argv character vector command line arguments
- *
- * @return 0 if program executed without errors
- */
 int main(
         const int argc,
         const char* argv[]
