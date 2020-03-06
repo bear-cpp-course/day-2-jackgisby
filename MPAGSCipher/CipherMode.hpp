@@ -4,6 +4,8 @@
 // Project files
 #include "CipherMode.hpp"
 
+/// @file
+
 /**
  * Whether to encrypt or decrypt the input text
  *

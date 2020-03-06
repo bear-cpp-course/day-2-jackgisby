@@ -2,7 +2,7 @@ add_library(MPAGSCipher STATIC
         TransformChar.cpp TransformChar.hpp
         ProcessCommandLine.cpp ProcessCommandLine.hpp
         CaesarCipher.cpp CaesarCipher.hpp CipherMode.hpp
-        )
+        PlayfairCipher.cpp PlayfairCipher.hpp)
 
 target_include_directories(MPAGSCipher
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}

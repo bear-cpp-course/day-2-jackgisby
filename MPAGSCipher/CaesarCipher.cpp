@@ -17,14 +17,6 @@ std::string CaesarCipher::applyCipher(
         const std::string& inputText,
         const CipherMode& mode
         ) const {
-    /* Encrypt or decrypt a code based on the caesar cipher
-     *
-     * std::string inputText: Input code to be operated on
-     * bool encrypt: whether to encrypt or decrypt the code
-     *
-     * return: encrypted/decrypted code
-     */
-
     // reverse key for decryption
     int key {0};
     if (mode == CipherMode::encrypt) {

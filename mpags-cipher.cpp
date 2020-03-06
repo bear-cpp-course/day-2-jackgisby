@@ -8,6 +8,7 @@
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
+#include <PlayfairCipher.hpp>
 
 int main(
         const int argc,
@@ -41,14 +42,16 @@ int main(
         code += transformChar(in_char);
     }
 
+    std::cout << "\n";
     in_file.close();
 
     // convert formatted string to ciphered string & output
-    CaesarCipher cipher {settings.key};
+    // CaesarCipher cipher {settings.key};
+    PlayfairCipher cipher {settings.key};
     code = cipher.applyCipher(code, settings.mode);
 
     if (settings.debug) {
-        std::cout << "\n" << "output: " << code << "\n";
+        std::cout << "output: " << code << "\n";
     }
 
     out_file << code;

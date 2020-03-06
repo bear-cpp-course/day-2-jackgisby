@@ -10,22 +10,15 @@
 #include "ProcessCommandLine.hpp"
 #include "CipherMode.hpp"
 
-/**
- * Structure containing program settings, set during command line processing
- *
- * @param input text to be encrypted or decrypted
- * @param output the encrypted or decrypted input text
- * @param key the key for encryption or decryption
- * @param debug debug mode for verbose operation
- * @param encrypt whether to encrypt or decrypt the input text
- * @param mode which cipher to use for encryption and decryption
- */
+/// @file
+
+/// Structure containing program settings, set during command line processing
 struct ProgramSettings {
-    std::string input {""};
-    std::string output {""};
-    std::string key {"5"};
-    bool debug {false};
-    CipherMode mode {CipherMode::encrypt};
+    std::string input {""}; ///< text to be encrypted or decrypted
+    std::string output {""}; ///< the encrypted or decrypted input text
+    std::string key {"5"}; ///< the key for encryption or decryption
+    bool debug {false}; ///< debug mode for verbose operation
+    CipherMode mode {CipherMode::encrypt}; ///< whether to encrypt or decrypt the input text
 };
 
 /**

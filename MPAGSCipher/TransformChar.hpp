@@ -4,6 +4,8 @@
 // Standard library
 #include <string>
 
+/// @file
+
 /**
  * Transliterate input characters to string
  *

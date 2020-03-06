@@ -1,40 +1,50 @@
-#ifndef MPAGSCIPHER_CAESARCIPHER_HPP
-#define MPAGSCIPHER_CAESARCIPHER_HPP
+#ifndef MPAGSCIPHER_PLAYFAIRCIPHER_HPP
+#define MPAGSCIPHER_PLAYFAIRCIPHER_HPP
 
 // Standard library
 #include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
 
 // Project files
-#include "CaesarCipher.hpp"
+#include "PlayfairCipher.hpp"
 #include "CipherMode.hpp"
 
 /// @file
 
 /**
- * Implementation of the caesar cipher
+ * Implementation of the playfair cipher
  *
  * @param encryptKey_ the key used for encryption and decryption
  * @param alphabet_ the allowable characters for ciphers
  */
-class CaesarCipher {
+class PlayfairCipher {
 private:
-    int encryptKey_;
+    std::string encryptKey_ {""};
     std::string alphabet_ {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 
-public:
-    /**
-     *  Create a caesar cipher class based on a key
-     *
-     * @param key encryption key
-     */
-    explicit CaesarCipher(int& key);
+    using PairToCharMap = std::map<std::pair<int, int>, char>;
+    PairToCharMap encryptGridKey_;
+
+    using CharToPairMap = std::map<char, std::pair<int, int>>;
+    CharToPairMap decryptGridKey_;
 
     /**
      * Create a caesar cipher class based on a key
      *
      * @param key encryption key
      */
-    explicit CaesarCipher(std::string& key);
+    void generategridKey();
+
+public:
+    /**
+     * Create a caesar cipher class based on a key
+     *
+     * @param key encryption key
+     */
+    explicit PlayfairCipher(std::string& key);
 
     /**
      * Encrypt or decrypt a code based on the caesar cipher
@@ -49,21 +59,21 @@ public:
     std::string applyCipher(
             const std::string& inputText,
             const CipherMode& mode
-            ) const;
+    ) const;
 
     /**
      * Get the cipher's key value
      *
      * @return The value of the encryption key
      */
-    int getKey() const;
+    std::string getKey() const;
 
     /**
      * Set the cipher's key value
      *
      * @param key The new key for encryption
      */
-    void setKey(int& key);
+    void setKey(std::string& key);
 
     /**
      * Get the cipher's alphabet
@@ -80,4 +90,4 @@ public:
     void setAlphabet(std::string& alphabet);
 };
 
-#endif //MPAGSCIPHER_CAESARCIPHER_HPP
+#endif //MPAGSCIPHER_PLAYFAIRCIPHER_HPP
