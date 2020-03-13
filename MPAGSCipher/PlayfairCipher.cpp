@@ -11,7 +11,7 @@
 
 PlayfairCipher::PlayfairCipher(std::string& key)
         : encryptKey_(key) {
-    PlayfairCipher::generategridKey();
+    PlayfairCipher::generateGridKey();
 }
 
 std::string PlayfairCipher::applyCipher(
@@ -19,21 +19,81 @@ std::string PlayfairCipher::applyCipher(
         const CipherMode& mode
         ) const {
 
-    std::string code {inputText};
+    std::string code {""};
 
     // Change J → I
+    std::replace(code.begin(), code.end(), 'J', 'I');
 
     // If repeated chars in a digraph add an X or Q if XX
+    for (int i {0}; i < inputText.length(); i += 2) {
+        code.push_back(inputText[i]);
+
+        if (inputText[i] == inputText[i + 1]) {
+            if (inputText[i] == 'X') {
+                code.push_back('Q');
+            } else {
+                code.push_back('X');
+            }
+
+            i--;
+        } else {
+            if (i+1 < inputText.length()) {
+                code.push_back(inputText[i + 1]);
+            }
+        }
+    }
 
     // if the size of input is odd, add a trailing Z
+    if ((code.length() % 2) != 0) {
+        code.push_back('Z');
+    }
 
     // Loop over the input in Digraphs
+    if (mode == CipherMode::encrypt) {
+        return playfairEncrypt(code);
+    } else {
+        return playfairDecrypt(code);
+    }
+}
 
-    // - Find the coords in the grid for each digraph
-    // - Apply the rules to these coords to get 'new' coords
-// - Find the letter associated with the new coords
-    // return the text
-    return code;
+std::string PlayfairCipher::playfairDecrypt(std::string &code) const {
+    return "whoops";
+}
+
+std::string PlayfairCipher::playfairEncrypt(std::string &code) const {
+    std::pair<int, int> coordA;
+    std::pair<int, int> coordB;
+    std::string translation {""};
+
+    for (int i {0}; i < code.length(); i += 2) {
+        // - Find the coords in the grid for each digraph
+        coordA = reverseGridKey_.at(code[i]);
+        coordB = reverseGridKey_.at(code[i + 1]);
+
+        // - Apply the rules to these coords to get 'new' coords
+        auto gridShift = [] (int& coord) {
+            if (++coord == 6) {
+                coord = 1;
+            }
+
+            return coord;
+        };
+        if (coordA.first == coordB.first) {
+            gridShift(coordA.first);
+            gridShift(coordB.first);
+        } else if (coordA.second == coordB.second) {
+            gridShift(coordA.second);
+            gridShift(coordB.second);
+        } else {
+            std::swap(coordA.second, coordB.second);
+        }
+
+        // - Find the letter associated with the new coords
+        translation.push_back(forwardGridKey_.at(coordA));
+        translation.push_back(forwardGridKey_.at(coordB));
+    }
+
+    return translation;
 }
 
 std::string PlayfairCipher::getKey() const {
@@ -42,7 +102,7 @@ std::string PlayfairCipher::getKey() const {
 
 void PlayfairCipher::setKey(std::string& key) {
     encryptKey_ = key;
-    generategridKey();
+    generateGridKey();
 }
 
 std::string PlayfairCipher::getAlphabet() const {
@@ -53,7 +113,7 @@ void PlayfairCipher::setAlphabet(std::string& alphabet) {
     alphabet_ = alphabet;
 }
 
-void PlayfairCipher::generategridKey() {
+void PlayfairCipher::generateGridKey() {
     // append alphabet
     std::string key {encryptKey_ + alphabet_};
 
@@ -78,20 +138,19 @@ void PlayfairCipher::generategridKey() {
     };
 
     key.erase(std::remove_if(key.begin(), key.end(), duplicate_check), key.end());
-    std::cout << duplicates << "\n";
 
     // Store the coords of each letter
     int x {1};
     int y {1};
-    for (int i {0}; i < 25; i++) {
+    for (int i {0}; i < 25; ++i) {
         // generate pairs of coords and key
         std::pair<int, int> coord {x, y};
         std::pair<std::pair<int, int>, char> coordToChar {coord, key[i]};
         std::pair<char, std::pair<int, int>> charToCoord {key[i], coord};
 
         // generate map
-        encryptGridKey_.insert(coordToChar);
-        decryptGridKey_.insert(charToCoord);
+        forwardGridKey_.insert(coordToChar);
+        reverseGridKey_.insert(charToCoord);
 
         // move coordinates
         y++;

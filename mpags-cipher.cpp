@@ -8,7 +8,8 @@
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
-#include <PlayfairCipher.hpp>
+#include "PlayfairCipher.hpp"
+#include "VigenereCipher.hpp"
 
 int main(
         const int argc,
@@ -46,8 +47,7 @@ int main(
     in_file.close();
 
     // convert formatted string to ciphered string & output
-    // CaesarCipher cipher {settings.key};
-    PlayfairCipher cipher {settings.key};
+    VigenereCipher cipher {settings.key};
     code = cipher.applyCipher(code, settings.mode);
 
     if (settings.debug) {

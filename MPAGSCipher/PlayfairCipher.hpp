@@ -26,17 +26,17 @@ private:
     std::string alphabet_ {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 
     using PairToCharMap = std::map<std::pair<int, int>, char>;
-    PairToCharMap encryptGridKey_;
+    PairToCharMap forwardGridKey_;
 
     using CharToPairMap = std::map<char, std::pair<int, int>>;
-    CharToPairMap decryptGridKey_;
+    CharToPairMap reverseGridKey_;
 
     /**
      * Create a caesar cipher class based on a key
      *
      * @param key encryption key
      */
-    void generategridKey();
+    void generateGridKey();
 
 public:
     /**
@@ -88,6 +88,9 @@ public:
      * @param alphabet The new set of allowable characters for encryption and decryption
      */
     void setAlphabet(std::string& alphabet);
+
+    std::string playfairEncrypt(std::string &code) const;
+    std::string playfairDecrypt(std::string &code) const;
 };
 
 #endif //MPAGSCIPHER_PLAYFAIRCIPHER_HPP
