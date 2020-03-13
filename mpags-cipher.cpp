@@ -3,14 +3,12 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <Cipher.hpp>
 
 // Project files
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
-#include "CaesarCipher.hpp"
-#include "PlayfairCipher.hpp"
-#include "VigenereCipher.hpp"
+#include "Cipher.hpp"
+#include "CipherFactory.hpp"
 
 int main(
         const int argc,
@@ -48,21 +46,8 @@ int main(
     in_file.close();
 
     // convert formatted string to ciphered string & output
-    switch (settings.type) {
-        case CipherType::CaesarCipher : {
-            CaesarCipher cipher {settings.key};
-            code = cipher.applyCipher(code, settings.mode);
-            break;
-        }
-        case CipherType::PlayfairCipher : {
-            PlayfairCipher cipher {settings.key};
-            code = cipher.applyCipher(code, settings.mode);
-        }
-        case CipherType::VigenereCipher : {
-            VigenereCipher cipher {settings.key};
-            code = cipher.applyCipher(code, settings.mode);
-        }
-    }
+    auto cipher = cipherFactory(settings.type, settings.key);
+    code = cipher->applyCipher(code, settings.mode);
 
     if (settings.debug) {
         std::cout << "output: " << code << "\n";

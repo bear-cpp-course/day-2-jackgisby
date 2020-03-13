@@ -59,6 +59,7 @@ void VigenereCipher::setKey(std::string& key) {
     key.erase(std::remove_if(key.begin(), key.end(), [] (char& c) { return !isalpha(c); } ), key.end());
 
     // Check if the key is empty and replace with default if so
+
     if (key.empty()) {
         encryptKey_ = "key";
     } else {
@@ -66,15 +67,15 @@ void VigenereCipher::setKey(std::string& key) {
     }
 
     // loop over the key
-    for (int i {0}; i < key.length(); ++i) {
+    for (int i {0}; i < encryptKey_.length(); ++i) {
         // Find the letter position in the alphabet
-        int keyPos {static_cast<int>(alphabet_.find(key[i]))};
+        int keyPos {static_cast<int>(alphabet_.find(encryptKey_[i]))};
 
         // Create a CaesarCipher using this position as a key
         CaesarCipher cipherPos {keyPos};
 
         // Insert a std::pair of the letter and CaesarCipher into the lookup
-        charLookup_.insert(std::pair<char, CaesarCipher> {key[i], cipherPos});
+        charLookup_.insert(std::pair<char, CaesarCipher> {encryptKey_[i], cipherPos});
     }
 }
 
