@@ -49,10 +49,13 @@ std::string PlayfairCipher::applyCipher(
     }
 
     // Loop over the input in Digraphs
-    if (mode == CipherMode::encrypt) {
-        return playfairEncrypt(code);
-    } else {
-        return playfairDecrypt(code);
+    switch (mode) {
+        case CipherMode::encrypt : {
+            return playfairEncrypt(code);
+        }
+        case CipherMode::decrypt : {
+            return playfairDecrypt(code);
+        }
     }
 }
 

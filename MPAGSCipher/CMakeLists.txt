@@ -3,7 +3,7 @@ add_library(MPAGSCipher STATIC
         ProcessCommandLine.cpp ProcessCommandLine.hpp
         CaesarCipher.cpp CaesarCipher.hpp CipherMode.hpp
         PlayfairCipher.cpp PlayfairCipher.hpp
-        VigenereCipher.cpp VigenereCipher.hpp Cipher.hpp)
+        VigenereCipher.cpp VigenereCipher.hpp Cipher.hpp CipherType.hpp)
 
 target_include_directories(MPAGSCipher
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}

@@ -6,6 +6,7 @@
 // Project files
 #include "ProcessCommandLine.hpp"
 #include "CipherMode.hpp"
+#include "CipherType.hpp"
 
 bool processCommandLine(
         const int& argc,
@@ -39,6 +40,17 @@ bool processCommandLine(
 
         } else if (cmdLineArgs[i] == "--decrypt") {
             args.mode = CipherMode::decrypt;
+        } else if (cmdLineArgs[i] == "--cipher") {
+            ++i;
+            if (cmdLineArgs.at(i) == "caesar") {
+                args.type = CipherType::CaesarCipher;
+            } else if (cmdLineArgs.at(i) == "playfair") {
+                args.type = CipherType::PlayfairCipher;
+            } else if (cmdLineArgs.at(i) == "vigenere") {
+                args.type = CipherType::VigenereCipher;
+            } else {
+                std::cout << "Invalide cipher type provided, defaulting to Caesar cipher" << "\n";
+            }
         }
     }
 

@@ -9,6 +9,7 @@
 // Project files
 #include "ProcessCommandLine.hpp"
 #include "CipherMode.hpp"
+#include "CipherType.hpp"
 
 /// @file
 
@@ -19,6 +20,7 @@ struct ProgramSettings {
     std::string key {"5"}; ///< the key for encryption or decryption
     bool debug {false}; ///< debug mode for verbose operation
     CipherMode mode {CipherMode::encrypt}; ///< whether to encrypt or decrypt the input text
+    CipherType type {CipherType::CaesarCipher}; ///< which type of cipher to use for encryption/decryption
 };
 
 /**

@@ -19,10 +19,15 @@ std::string CaesarCipher::applyCipher(
         ) const {
     // reverse key for decryption
     int key {0};
-    if (mode == CipherMode::encrypt) {
-        key = encryptKey_;
-    } else {
-        key = -encryptKey_;
+    switch (mode) {
+        case CipherMode::encrypt : {
+            key = encryptKey_;
+            break;
+        }
+        case CipherMode::decrypt : {
+            key = -encryptKey_;
+            break;
+        }
     }
 
     // encrypt/decrypt each character and return final code

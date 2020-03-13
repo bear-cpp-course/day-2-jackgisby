@@ -5,6 +5,7 @@
 #include <string>
 
 // Project files
+#include "Cipher.hpp"
 #include "CaesarCipher.hpp"
 #include "CipherMode.hpp"
 
@@ -16,7 +17,7 @@
  * @param encryptKey_ the key used for encryption and decryption
  * @param alphabet_ the allowable characters for ciphers
  */
-class CaesarCipher {
+class CaesarCipher : public Cipher {
 private:
     int encryptKey_;
     std::string alphabet_ {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
@@ -49,7 +50,7 @@ public:
     std::string applyCipher(
             const std::string& inputText,
             const CipherMode& mode
-            ) const;
+            ) const override;
 
     /**
      * Get the cipher's key value

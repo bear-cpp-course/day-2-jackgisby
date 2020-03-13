@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <Cipher.hpp>
 
 // Project files
 #include "TransformChar.hpp"
@@ -47,8 +48,21 @@ int main(
     in_file.close();
 
     // convert formatted string to ciphered string & output
-    VigenereCipher cipher {settings.key};
-    code = cipher.applyCipher(code, settings.mode);
+    switch (settings.type) {
+        case CipherType::CaesarCipher : {
+            CaesarCipher cipher {settings.key};
+            code = cipher.applyCipher(code, settings.mode);
+            break;
+        }
+        case CipherType::PlayfairCipher : {
+            PlayfairCipher cipher {settings.key};
+            code = cipher.applyCipher(code, settings.mode);
+        }
+        case CipherType::VigenereCipher : {
+            VigenereCipher cipher {settings.key};
+            code = cipher.applyCipher(code, settings.mode);
+        }
+    }
 
     if (settings.debug) {
         std::cout << "output: " << code << "\n";
